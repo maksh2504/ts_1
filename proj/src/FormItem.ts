@@ -1,6 +1,13 @@
-class FormItem {
+interface IFormItem {
     element: HTMLElement;
-    validator (): boolean;
+    validator: (el: HTMLElement, conf?: object) => boolean;
+    type: string;
+    confirm: object
+}
+
+class FormItem implements IFormItem{
+    element: HTMLElement;
+    validator: (el: HTMLElement, conf?: object) => boolean;
     type: string;
     confirm: object
 
@@ -11,7 +18,6 @@ class FormItem {
         this.type = type
         this.confirm = confirm
     }
-
 
     validate () {
         if (this.type === 'password'){
@@ -27,4 +33,4 @@ class FormItem {
     }
 }
 
-export default FormItem
+export {FormItem, IFormItem};

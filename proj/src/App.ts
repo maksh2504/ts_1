@@ -7,7 +7,6 @@ form1.addField({
     label: 'First name:',
     name: 'firstName',
     validator: (name: HTMLInputElement) => name.value.length > 0 && name.value.length <= 8
-
 })
 
 form1.addField({
