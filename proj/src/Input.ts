@@ -1,10 +1,11 @@
 class FormItem {
-    element: any;
-    validator: any;
+    element: HTMLElement;
+    validator (): boolean;
     type: string;
     confirm: object
 
-    constructor({ element: element, validator: validator, type: type = 'input', confirm: confirm } : any) {
+    constructor({element, validator, type = 'input', confirm}:
+                    { element: HTMLElement; validator(): boolean; type: string; confirm?: object}) {
         this.element = element
         this.validator = validator
         this.type = type
@@ -22,7 +23,7 @@ class FormItem {
     }
 
     get value() {
-        return this.element?.value
+        return this.element
     }
 }
 
