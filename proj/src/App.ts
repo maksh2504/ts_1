@@ -6,7 +6,7 @@ const form1 = new Form (document.getElementById("form_id"))
 //     type: string;
 //     label: string;
 //     name: string;
-//     validator: any
+//     validator: any;
 // }
 
 form1.addField({
