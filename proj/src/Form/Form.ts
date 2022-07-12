@@ -1,11 +1,6 @@
-import FormItem from "./Input"
+import {FormItem, IFormItem} from "../FormItem/FormItem"
 
-type TFormInstance = {
-    type: string;
-    label: string;
-    name: string;
-    validator: any;
-}
+type TFormInstance = Record <string, IFormItem>
 
 interface IForm {
     formInstance: TFormInstance;
@@ -13,11 +8,11 @@ interface IForm {
 }
 
 class Form implements IForm {
-    formInstance: any;
-    formElement: any;
+    formInstance: TFormInstance;
+    formElement: HTMLElement;
 
-    constructor(formElement: any) {
-        this.formInstance = {}
+    constructor(formElement: HTMLElement) {
+        this.formInstance = {} as TFormInstance
         this.formElement = formElement
 
         this.formElement.addEventListener("submit", this._submit)
@@ -25,7 +20,7 @@ class Form implements IForm {
 
     _printForm = () => {
         for(let field in this.formInstance) {
-            console.log(field + ": " + this.formInstance[field].element.value);
+            console.log(field + ": " + this.formInstance[field].value); // .value
         }
 
     }
@@ -38,7 +33,7 @@ class Form implements IForm {
         return true
     }
 
-    _submit = (e : any) => {
+    _submit = (e : Event) => {
         e.preventDefault(); // Отключает стандартный обработчик
 
         if (this._validate()){
@@ -46,35 +41,40 @@ class Form implements IForm {
         }
     }
 
-    addField ({type, label, name, validator} : any) {
+    addField (formInput: {type: string, label: string, name: string, validator: (a: HTMLInputElement) => boolean}) {
         const section = document.createElement('div');
 
         const inputLabel = document.createElement('label')
-        inputLabel.innerHTML = label
+        inputLabel.innerHTML = formInput.label
         section.append(inputLabel)
 
         const element = document.createElement('input')
-        element.id = name
-        element.type = type
+        element.id = formInput.name
+        element.type = formInput.type
         element.required = true
         section.append(element)
 
         this.formElement.append(section)
 
-        this.formInstance[name] = new FormItem({
-            element,
-            validator,
-            type
+        console.log(formInput.name)
+        console.log(this.formInstance)
+
+        this.formInstance[formInput.name] = new FormItem({
+            element: element,
+            validator: formInput.validator,
+            type: formInput.type
         })
     }
 
-    addButton({type, label, name} : any) {
+    addButton(formButton: {type: string, label: string, name: string}) {
+        // addButton(formButton: {type: string, label: string, name: string}) {
+
         const section = document.createElement('div');
-        section.id = name;
+        section.id = formButton.name;
 
         const button = document.createElement('button')
-        button.type = type
-        button.textContent = label
+        button.type = formButton.type
+        button.textContent = formButton.label
         section.append(button)
 
         this.formElement.append(section)
