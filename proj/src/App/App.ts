@@ -1,11 +1,11 @@
-import Form from "./Form"
+import Form from "../Form/Form"
 
 const form1 = new Form (document.getElementById("form_id"))
 
 form1.addField({
     type: 'input',
-    label: 'First name:',
-    name: 'firstName',
+    label: 'First name1:',
+    name: 'firstName1',
     validator: (name: HTMLInputElement) => name.value.length > 0 && name.value.length <= 8
 })
 
@@ -20,7 +20,7 @@ form1.addField({
     type: 'password',
     label: 'Password:',
     name: 'password',
-    validator: (password: HTMLInputElement) => password.value
+    validator: (password: HTMLInputElement) => password.value !== ""
 })
 
 form1.addField({

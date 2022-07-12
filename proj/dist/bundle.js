@@ -4,16 +4,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Form_1 = require("./Form");
 var form1 = new Form_1.default(document.getElementById("form_id"));
-// interface inputField {
-//     type: string;
-//     label: string;
-//     name: string;
-//     validator: any;
-// }
 form1.addField({
     type: 'input',
-    label: 'First name:',
-    name: 'firstName',
+    label: 'First name1:',
+    name: 'firstName1',
     validator: function validator(name) {
         return name.value.length > 0 && name.value.length <= 8;
     }
@@ -31,7 +25,7 @@ form1.addField({
     label: 'Password:',
     name: 'password',
     validator: function validator(password) {
-        return password.value;
+        return password.value !== "";
     }
 });
 form1.addField({
@@ -74,7 +68,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Input_1 = require("./Input");
+var FormItem_1 = require("./FormItem");
 
 var Form = function () {
     function Form(formElement) {
@@ -84,7 +78,7 @@ var Form = function () {
 
         this._printForm = function () {
             for (var field in _this.formInstance) {
-                console.log(field + ": " + _this.formInstance[field].element.value);
+                console.log(field + ": " + _this.formInstance[field].value); // .value
             }
         };
         this._validate = function () {
@@ -106,40 +100,34 @@ var Form = function () {
 
     _createClass(Form, [{
         key: "addField",
-        value: function addField(_ref) {
-            var type = _ref.type,
-                label = _ref.label,
-                name = _ref.name,
-                validator = _ref.validator;
-
+        value: function addField(formInput) {
             var section = document.createElement('div');
             var inputLabel = document.createElement('label');
-            inputLabel.innerHTML = label;
+            inputLabel.innerHTML = formInput.label;
             section.append(inputLabel);
             var element = document.createElement('input');
-            element.id = name;
-            element.type = type;
+            element.id = formInput.name;
+            element.type = formInput.type;
             element.required = true;
             section.append(element);
             this.formElement.append(section);
-            this.formInstance[name] = new Input_1.default({
+            console.log(formInput.name);
+            console.log(this.formInstance);
+            this.formInstance[formInput.name] = new FormItem_1.FormItem({
                 element: element,
-                validator: validator,
-                type: type
+                validator: formInput.validator,
+                type: formInput.type
             });
         }
     }, {
         key: "addButton",
-        value: function addButton(_ref2) {
-            var type = _ref2.type,
-                label = _ref2.label,
-                name = _ref2.name;
-
+        value: function addButton(formButton) {
+            // addButton(formButton: {type: string, label: string, name: string}) {
             var section = document.createElement('div');
-            section.id = name;
+            section.id = formButton.name;
             var button = document.createElement('button');
-            button.type = type;
-            button.textContent = label;
+            button.type = formButton.type;
+            button.textContent = formButton.label;
             section.append(button);
             this.formElement.append(section);
         }
@@ -150,7 +138,7 @@ var Form = function () {
 
 exports.default = Form;
 
-},{"./Input":3}],3:[function(require,module,exports){
+},{"./FormItem":3}],3:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -158,6 +146,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormItem = void 0;
 
 var FormItem = function () {
     function FormItem(_ref) {
@@ -187,15 +176,14 @@ var FormItem = function () {
     }, {
         key: "value",
         get: function get() {
-            var _a;
-            return (_a = this.element) === null || _a === void 0 ? void 0 : _a.value;
+            return this.element.value;
         }
     }]);
 
     return FormItem;
 }();
 
-exports.default = FormItem;
+exports.FormItem = FormItem;
 
 },{}]},{},[1])
 

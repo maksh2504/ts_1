@@ -1,4 +1,4 @@
-import {FormItem, IFormItem} from "./FormItem"
+import {FormItem, IFormItem} from "../FormItem/FormItem"
 
 type TFormInstance = Record <string, IFormItem>
 
@@ -12,7 +12,7 @@ class Form implements IForm {
     formElement: HTMLElement;
 
     constructor(formElement: HTMLElement) {
-        // this.formInstance = {}
+        this.formInstance = {} as TFormInstance
         this.formElement = formElement
 
         this.formElement.addEventListener("submit", this._submit)
@@ -20,7 +20,7 @@ class Form implements IForm {
 
     _printForm = () => {
         for(let field in this.formInstance) {
-            console.log(field + ": " + this.formInstance[field].element.value);
+            console.log(field + ": " + this.formInstance[field].value); // .value
         }
 
     }
@@ -33,7 +33,7 @@ class Form implements IForm {
         return true
     }
 
-    _submit = (e : any) => {
+    _submit = (e : Event) => {
         e.preventDefault(); // Отключает стандартный обработчик
 
         if (this._validate()){
@@ -41,7 +41,7 @@ class Form implements IForm {
         }
     }
 
-    addField (formInput: {type: string, label: string, name: string, validator(): boolean}) {
+    addField (formInput: {type: string, label: string, name: string, validator: (a: HTMLInputElement) => boolean}) {
         const section = document.createElement('div');
 
         const inputLabel = document.createElement('label')
@@ -55,6 +55,9 @@ class Form implements IForm {
         section.append(element)
 
         this.formElement.append(section)
+
+        console.log(formInput.name)
+        console.log(this.formInstance)
 
         this.formInstance[formInput.name] = new FormItem({
             element: element,

@@ -1,18 +1,28 @@
+export type TValidator = (el: HTMLElement, conf?: object) => boolean;
+
 interface IFormItem {
-    element: HTMLElement;
+    element: HTMLInputElement;
+    validator: TValidator;
+    type: string;
+    confirm: object;
+    validate: () => boolean;
+    value: string;
+}
+
+type TFomItemProps = {
+    element: HTMLInputElement;
     validator: (el: HTMLElement, conf?: object) => boolean;
     type: string;
-    confirm: object
+    confirm?: object
 }
 
 class FormItem implements IFormItem{
-    element: HTMLElement;
+    element: HTMLInputElement;
     validator: (el: HTMLElement, conf?: object) => boolean;
     type: string;
     confirm: object
 
-    constructor({element, validator, type = 'input', confirm}:
-                    { element: HTMLElement; validator(): boolean; type: string; confirm?: object}) {
+    constructor({element, validator, type = 'input', confirm}: TFomItemProps) {
         this.element = element
         this.validator = validator
         this.type = type
@@ -29,7 +39,7 @@ class FormItem implements IFormItem{
     }
 
     get value() {
-        return this.element
+        return this.element.value;
     }
 }
 
