@@ -55,9 +55,6 @@ class Form implements IForm {
 
         this.formElement.append(section)
 
-        console.log(formInput.name)
-        console.log(this.formInstance)
-
         this.formInstance[formInput.name] = new FormItem({
             element: element,
             validator: formInput.validator,

@@ -2,7 +2,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Form_1 = require("./Form");
+var Form_1 = require("../Form/Form");
 var form1 = new Form_1.default(document.getElementById("form_id"));
 form1.addField({
     type: 'input',
@@ -60,7 +60,7 @@ form1.addButton({
     name: 'submit'
 });
 
-},{"./Form":2}],2:[function(require,module,exports){
+},{"../Form/Form":3}],2:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -68,7 +68,54 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var FormItem_1 = require("./FormItem");
+exports.FormItem = void 0;
+
+var FormItem = function () {
+    function FormItem(_ref) {
+        var element = _ref.element,
+            validator = _ref.validator,
+            _ref$type = _ref.type,
+            type = _ref$type === undefined ? 'input' : _ref$type,
+            confirm = _ref.confirm;
+
+        _classCallCheck(this, FormItem);
+
+        this.element = element;
+        this.validator = validator;
+        this.type = type;
+        this.confirm = confirm;
+    }
+
+    _createClass(FormItem, [{
+        key: "validate",
+        value: function validate() {
+            if (this.type === 'password') {
+                return this.validator(this.element, this.confirm);
+            } else {
+                return this.validator(this.element);
+            }
+        }
+    }, {
+        key: "value",
+        get: function get() {
+            return this.element.value;
+        }
+    }]);
+
+    return FormItem;
+}();
+
+exports.FormItem = FormItem;
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var FormItem_1 = require("../FormItem/FormItem");
 
 var Form = function () {
     function Form(formElement) {
@@ -122,7 +169,6 @@ var Form = function () {
     }, {
         key: "addButton",
         value: function addButton(formButton) {
-            // addButton(formButton: {type: string, label: string, name: string}) {
             var section = document.createElement('div');
             section.id = formButton.name;
             var button = document.createElement('button');
@@ -138,53 +184,6 @@ var Form = function () {
 
 exports.default = Form;
 
-},{"./FormItem":3}],3:[function(require,module,exports){
-"use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormItem = void 0;
-
-var FormItem = function () {
-    function FormItem(_ref) {
-        var element = _ref.element,
-            validator = _ref.validator,
-            _ref$type = _ref.type,
-            type = _ref$type === undefined ? 'input' : _ref$type,
-            confirm = _ref.confirm;
-
-        _classCallCheck(this, FormItem);
-
-        this.element = element;
-        this.validator = validator;
-        this.type = type;
-        this.confirm = confirm;
-    }
-
-    _createClass(FormItem, [{
-        key: "validate",
-        value: function validate() {
-            if (this.type === 'password') {
-                return this.validator(this.element, this.confirm);
-            } else {
-                return this.validator(this.element);
-            }
-        }
-    }, {
-        key: "value",
-        get: function get() {
-            return this.element.value;
-        }
-    }]);
-
-    return FormItem;
-}();
-
-exports.FormItem = FormItem;
-
-},{}]},{},[1])
+},{"../FormItem/FormItem":2}]},{},[1])
 
 //# sourceMappingURL=bundle.js.map
