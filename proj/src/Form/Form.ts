@@ -1,6 +1,5 @@
-import {FormItem, IFormItem} from "../FormItem/FormItem"
-
-type TFormInstance = Record <string, IFormItem>
+import {FormItem} from "../FormItem/FormItem"
+import {TFormInstance} from  "../Form/Types"
 
 interface IForm {
     formInstance: TFormInstance;
@@ -67,8 +66,6 @@ class Form implements IForm {
     }
 
     addButton(formButton: {type: string, label: string, name: string}) {
-        // addButton(formButton: {type: string, label: string, name: string}) {
-
         const section = document.createElement('div');
         section.id = formButton.name;
 
