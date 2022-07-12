@@ -4,8 +4,8 @@ const form1 = new Form (document.getElementById("form_id"))
 
 form1.addField({
     type: 'input',
-    label: 'First name1:',
-    name: 'firstName1',
+    label: 'First name:',
+    name: 'firstName',
     validator: (name: HTMLInputElement) => name.value.length > 0 && name.value.length <= 8
 })
 

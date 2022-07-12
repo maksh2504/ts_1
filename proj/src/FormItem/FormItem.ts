@@ -1,4 +1,4 @@
-export type TValidator = (el: HTMLElement, conf?: object) => boolean;
+import {TFomItemProps, TValidator} from "../FormItem/Types"
 
 interface IFormItem {
     element: HTMLInputElement;
@@ -7,13 +7,6 @@ interface IFormItem {
     confirm: object;
     validate: () => boolean;
     value: string;
-}
-
-type TFomItemProps = {
-    element: HTMLInputElement;
-    validator: (el: HTMLElement, conf?: object) => boolean;
-    type: string;
-    confirm?: object
 }
 
 class FormItem implements IFormItem{

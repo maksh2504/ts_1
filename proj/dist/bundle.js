@@ -2,12 +2,12 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Form_1 = require("./Form");
+var Form_1 = require("../Form/Form");
 var form1 = new Form_1.default(document.getElementById("form_id"));
 form1.addField({
     type: 'input',
-    label: 'First name1:',
-    name: 'firstName1',
+    label: 'First name:',
+    name: 'firstName',
     validator: function validator(name) {
         return name.value.length > 0 && name.value.length <= 8;
     }
@@ -60,85 +60,7 @@ form1.addButton({
     name: 'submit'
 });
 
-},{"./Form":2}],2:[function(require,module,exports){
-"use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var FormItem_1 = require("./FormItem");
-
-var Form = function () {
-    function Form(formElement) {
-        var _this = this;
-
-        _classCallCheck(this, Form);
-
-        this._printForm = function () {
-            for (var field in _this.formInstance) {
-                console.log(field + ": " + _this.formInstance[field].value); // .value
-            }
-        };
-        this._validate = function () {
-            for (var field in _this.formInstance) {
-                if (!_this.formInstance[field].validate()) return false;
-            }
-            return true;
-        };
-        this._submit = function (e) {
-            e.preventDefault(); // Отключает стандартный обработчик
-            if (_this._validate()) {
-                _this._printForm();
-            }
-        };
-        this.formInstance = {};
-        this.formElement = formElement;
-        this.formElement.addEventListener("submit", this._submit);
-    }
-
-    _createClass(Form, [{
-        key: "addField",
-        value: function addField(formInput) {
-            var section = document.createElement('div');
-            var inputLabel = document.createElement('label');
-            inputLabel.innerHTML = formInput.label;
-            section.append(inputLabel);
-            var element = document.createElement('input');
-            element.id = formInput.name;
-            element.type = formInput.type;
-            element.required = true;
-            section.append(element);
-            this.formElement.append(section);
-            console.log(formInput.name);
-            console.log(this.formInstance);
-            this.formInstance[formInput.name] = new FormItem_1.FormItem({
-                element: element,
-                validator: formInput.validator,
-                type: formInput.type
-            });
-        }
-    }, {
-        key: "addButton",
-        value: function addButton(formButton) {
-            // addButton(formButton: {type: string, label: string, name: string}) {
-            var section = document.createElement('div');
-            section.id = formButton.name;
-            var button = document.createElement('button');
-            button.type = formButton.type;
-            button.textContent = formButton.label;
-            section.append(button);
-            this.formElement.append(section);
-        }
-    }]);
-
-    return Form;
-}();
-
-exports.default = Form;
-
-},{"./FormItem":3}],3:[function(require,module,exports){
+},{"../Form/Form":3}],2:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -185,6 +107,81 @@ var FormItem = function () {
 
 exports.FormItem = FormItem;
 
-},{}]},{},[1])
+},{}],3:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var FormItem_1 = require("../FormItem/FormItem");
+
+var Form = function () {
+    function Form(formElement) {
+        var _this = this;
+
+        _classCallCheck(this, Form);
+
+        this._printForm = function () {
+            for (var field in _this.formInstance) {
+                console.log(field + ": " + _this.formInstance[field].value); // .value
+            }
+        };
+        this._validate = function () {
+            for (var field in _this.formInstance) {
+                if (!_this.formInstance[field].validate()) return false;
+            }
+            return true;
+        };
+        this._submit = function (e) {
+            e.preventDefault(); // Отключает стандартный обработчик
+            if (_this._validate()) {
+                _this._printForm();
+            }
+        };
+        this.formInstance = {};
+        this.formElement = formElement;
+        this.formElement.addEventListener("submit", this._submit);
+    }
+
+    _createClass(Form, [{
+        key: "addField",
+        value: function addField(formInput) {
+            var section = document.createElement('div');
+            var inputLabel = document.createElement('label');
+            inputLabel.innerHTML = formInput.label;
+            section.append(inputLabel);
+            var element = document.createElement('input');
+            element.id = formInput.name;
+            element.type = formInput.type;
+            element.required = true;
+            section.append(element);
+            this.formElement.append(section);
+            this.formInstance[formInput.name] = new FormItem_1.FormItem({
+                element: element,
+                validator: formInput.validator,
+                type: formInput.type
+            });
+        }
+    }, {
+        key: "addButton",
+        value: function addButton(formButton) {
+            var section = document.createElement('div');
+            section.id = formButton.name;
+            var button = document.createElement('button');
+            button.type = formButton.type;
+            button.textContent = formButton.label;
+            section.append(button);
+            this.formElement.append(section);
+        }
+    }]);
+
+    return Form;
+}();
+
+exports.default = Form;
+
+},{"../FormItem/FormItem":2}]},{},[1])
 
 //# sourceMappingURL=bundle.js.map

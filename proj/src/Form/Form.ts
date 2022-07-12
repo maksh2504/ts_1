@@ -1,6 +1,5 @@
-import {FormItem, IFormItem} from "../FormItem/FormItem"
-
-type TFormInstance = Record <string, IFormItem>
+import {FormItem} from "../FormItem/FormItem"
+import {TFormInstance, TAddField, TAddButton} from  "../Form/Types"
 
 interface IForm {
     formInstance: TFormInstance;
@@ -41,7 +40,7 @@ class Form implements IForm {
         }
     }
 
-    addField (formInput: {type: string, label: string, name: string, validator: (a: HTMLInputElement) => boolean}) {
+    addField (formInput: TAddField) {
         const section = document.createElement('div');
 
         const inputLabel = document.createElement('label')
@@ -56,9 +55,6 @@ class Form implements IForm {
 
         this.formElement.append(section)
 
-        console.log(formInput.name)
-        console.log(this.formInstance)
-
         this.formInstance[formInput.name] = new FormItem({
             element: element,
             validator: formInput.validator,
@@ -66,9 +62,7 @@ class Form implements IForm {
         })
     }
 
-    addButton(formButton: {type: string, label: string, name: string}) {
-        // addButton(formButton: {type: string, label: string, name: string}) {
-
+    addButton(formButton: TAddButton) {
         const section = document.createElement('div');
         section.id = formButton.name;
 
