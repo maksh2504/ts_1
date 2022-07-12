@@ -6,8 +6,8 @@ var Form_1 = require("../Form/Form");
 var form1 = new Form_1.default(document.getElementById("form_id"));
 form1.addField({
     type: 'input',
-    label: 'First name1:',
-    name: 'firstName1',
+    label: 'First name:',
+    name: 'firstName',
     validator: function validator(name) {
         return name.value.length > 0 && name.value.length <= 8;
     }
@@ -158,8 +158,6 @@ var Form = function () {
             element.required = true;
             section.append(element);
             this.formElement.append(section);
-            console.log(formInput.name);
-            console.log(this.formInstance);
             this.formInstance[formInput.name] = new FormItem_1.FormItem({
                 element: element,
                 validator: formInput.validator,
