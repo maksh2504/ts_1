@@ -1,4 +1,3 @@
-// import {TFomItemProps, TValidator} from "../FormItem/Types"
 import {TFomItemProps, TValidator} from "../FormItem/Types"
 
 interface IFormItem {
