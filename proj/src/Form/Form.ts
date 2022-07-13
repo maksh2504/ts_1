@@ -1,5 +1,5 @@
 import {FormItem} from "../FormItem/FormItem"
-import {TFormInstance, TAddField, TAddButton} from  "../Form/Types"
+import {TFormInstance, TAddField, TAddButton} from "./types"
 
 interface IForm {
     formInstance: TFormInstance;

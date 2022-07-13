@@ -1,4 +1,4 @@
-import Form from "../Form/Form"
+import Form from "./Form/Form"
 
 const form1 = new Form (document.getElementById("form_id"))
 
