@@ -2,7 +2,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Form_1 = require("../Form/Form");
+var Form_1 = require("./Form/Form");
 var form1 = new Form_1.default(document.getElementById("form_id"));
 form1.addField({
     type: 'input',
@@ -60,7 +60,7 @@ form1.addButton({
     name: 'submit'
 });
 
-},{"../Form/Form":3}],2:[function(require,module,exports){
+},{"./Form/Form":3}],2:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
