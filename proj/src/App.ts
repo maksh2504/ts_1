@@ -1,6 +1,6 @@
-import Form from "./Form/Form"
+import Form from "./Form/Form";
 
-const form1 = new Form (document.getElementById("form_id"))
+const form1 = new Form (document.getElementById("form_id"));
 
 form1.addField({
     type: 'input',

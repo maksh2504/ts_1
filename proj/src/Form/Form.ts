@@ -1,5 +1,5 @@
-import {FormItem} from "../FormItem/FormItem"
-import {TFormInstance, TAddField, TAddButton} from "./types"
+import {FormItem} from "../FormItem/FormItem";
+import {TFormInstance, TAddField, TAddButton} from "./types";
 
 interface IForm {
     formInstance: TFormInstance;
@@ -11,10 +11,10 @@ class Form implements IForm {
     formElement: HTMLElement;
 
     constructor(formElement: HTMLElement) {
-        this.formInstance = {} as TFormInstance
-        this.formElement = formElement
+        this.formInstance = {} as TFormInstance;
+        this.formElement = formElement;
 
-        this.formElement.addEventListener("submit", this._submit)
+        this.formElement.addEventListener("submit", this._submit);
     }
 
     _printForm = () => {
@@ -26,10 +26,10 @@ class Form implements IForm {
 
     _validate = () => {
         for(let field in this.formInstance) {
-            if(!this.formInstance[field].validate()) return false
+            if(!this.formInstance[field].validate()) return false;
         }
 
-        return true
+        return true;
     }
 
     _submit = (e : Event) => {
@@ -43,17 +43,17 @@ class Form implements IForm {
     addField (formInput: TAddField) {
         const section = document.createElement('div');
 
-        const inputLabel = document.createElement('label')
-        inputLabel.innerHTML = formInput.label
-        section.append(inputLabel)
+        const inputLabel = document.createElement('label');
+        inputLabel.innerHTML = formInput.label;
+        section.append(inputLabel);
 
-        const element = document.createElement('input')
-        element.id = formInput.name
-        element.type = formInput.type
-        element.required = true
-        section.append(element)
+        const element = document.createElement('input');
+        element.id = formInput.name;
+        element.type = formInput.type;
+        element.required = true;
+        section.append(element);
 
-        this.formElement.append(section)
+        this.formElement.append(section);
 
         this.formInstance[formInput.name] = new FormItem({
             element: element,
@@ -66,14 +66,14 @@ class Form implements IForm {
         const section = document.createElement('div');
         section.id = formButton.name;
 
-        const button = document.createElement('button')
-        button.type = formButton.type
-        button.textContent = formButton.label
-        section.append(button)
+        const button = document.createElement('button');
+        button.type = formButton.type;
+        button.textContent = formButton.label;
+        section.append(button);
 
-        this.formElement.append(section)
+        this.formElement.append(section);
     }
 }
 
-export default Form
+export default Form;
 
